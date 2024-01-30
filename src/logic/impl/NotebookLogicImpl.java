@@ -12,11 +12,19 @@ public class NotebookLogicImpl implements NotebookLogic {
     private final DaoProvider provider = DaoProvider.getInstance();
     private final NoteBookDao dao = provider.getNoteBookDao();
 
-
     @Override
     public void add(Note n) throws LogicException {
         try {
             dao.save(n);
+        } catch (DaoException e) {
+            throw new LogicException(e);
+        }
+    }
+
+    @Override
+    public void update(Note n) throws LogicException {
+        try {
+            dao.update(n);
         } catch (DaoException e) {
             throw new LogicException(e);
         }
@@ -50,18 +58,18 @@ public class NotebookLogicImpl implements NotebookLogic {
     }
 
     @Override
-    public void sortNotesTitle() throws LogicException {
+    public void find(int idFind) throws LogicException {
         try {
-            dao.sortNotesTitle();
+            dao.find(idFind);
         } catch (DaoException e) {
             throw new LogicException(e);
         }
     }
 
     @Override
-    public void sortNotesContent() throws LogicException {
+    public void find(String title) throws LogicException {
         try {
-            dao.sortNotesContent();
+            dao.find(title);
         } catch (DaoException e) {
             throw new LogicException(e);
         }

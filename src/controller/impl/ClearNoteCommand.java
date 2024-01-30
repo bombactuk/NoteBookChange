@@ -18,10 +18,10 @@ public class ClearNoteCommand implements Command {
         try {
             logic.clear();
 
-            response = "Список очищен";
+            response = "List cleared.";
 
         } catch (LogicException e) {
-            response = "Список не очищен";
+            response = "The list has not been cleared.";
         }
 
         return response;

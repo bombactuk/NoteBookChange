@@ -5,11 +5,10 @@ import logic.LogicException;
 import logic.LogicProvider;
 import logic.NotebookLogic;
 
-public class DeleteNoteCommand implements Command {
+public class FindNoteCommand implements Command {
 
     private final LogicProvider logicProvider = LogicProvider.getInstance();
     private final NotebookLogic logic = logicProvider.getNotebookLogic();
-
 
     @Override
     public String execute(String request) {
@@ -22,16 +21,16 @@ public class DeleteNoteCommand implements Command {
 
         switch (params[0]) {
 
-            case "number": {
+            case "title": {
 
                 try {
 
-                    logic.deleteNumberList(Integer.parseInt(params[1]) - 1);
+                    logic.find(params[1]);
 
-                    response = "The entry was deleted successfully.";
+                    response = "Found strings are printed.";
 
                 } catch (LogicException | NumberFormatException e) {
-                    response = "The entry has not been deleted.";
+                    response = "Found lines are not displayed.";
                 }
 
                 break;
@@ -41,19 +40,19 @@ public class DeleteNoteCommand implements Command {
             case "id": {
                 try {
 
-                    logic.deleteIdList(Integer.parseInt(params[1]));
+                    logic.find(Integer.parseInt(params[1]));
 
-                    response = "The entry was deleted successfully.";
+                    response = "Found strings are printed.";
 
                 } catch (LogicException | NumberFormatException e) {
-                    response = "The entry has not been deleted.";
+                    response = "Found lines are not displayed.";
                 }
 
                 break;
             }
 
             default: {
-                response = "Field deletion not found.";
+                response = "Field not found.";
             }
 
         }

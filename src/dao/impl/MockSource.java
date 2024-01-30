@@ -1,52 +1,89 @@
 package dao.impl;
 
 import entity.Note;
-import entity.SortingItems;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.concurrent.ArrayBlockingQueue;
 
-public class MockSource {
-    private static List<Note> notes = new ArrayList<>();
-
-    public static void add(Note n) {
-        notes.add(n);
+public final class MockSource {
+    public void add(Note n) {
+        MockSourseProvider.getNotes().add(n);
     }
 
-    public static void clear() {
-        notes.clear();
-    }
+    public void update(Note n) {
 
-    public static void deleteNumberList(int numberInTheListDelete) {
-        notes.remove(numberInTheListDelete);
-    }
+        for (Note s : MockSourseProvider.getNotes()) {
 
-    public static void deleteIdList(int idListDelete) {
+            if (s.getId() == n.getId()) {
 
-        for (int i = 0; i < notes.size(); i++) {
-            if (notes.get(i).getId() == idListDelete) {
-                notes.remove(i);
+                s.setTitle(n.getTitle());
+                s.setContent(n.getContent());
+                s.setDate(n.getDate());
+
             }
+
         }
 
     }
 
-    public static void sortNotesTitle() {
-        Collections.sort(notes);
+    public void clear() {
+        MockSourseProvider.getNotes().clear();
     }
 
-    public static void sortNotesContent() {
-        Comparator<Note> contentComparator = new SortingItems();
-        notes.sort(contentComparator);
+    public void deleteNumberList(int numberInTheListDelete) {
+
+        int counter = 0;
+
+        for (Note s : MockSourseProvider.getNotes()) {
+
+            if (counter == numberInTheListDelete) {
+                MockSourseProvider.getNotes().remove(s);
+                break;
+            }
+
+            counter++;
+
+        }
+
     }
 
-    public static List<Note> get() {
+    public void deleteIdList(int idListDelete) {
+        MockSourseProvider.getNotes().removeIf(s -> s.getId() == idListDelete);
+    }
+
+    public ArrayBlockingQueue<Note> find(int idFind) {
+
+        ArrayBlockingQueue<Note> notes = new ArrayBlockingQueue<>(1000);
+
+        for (Note s : MockSourseProvider.getNotes()) {
+            if (idFind == s.getId()) {
+                notes.add(s);
+            }
+        }
+
         return notes;
+
     }
 
-    public static int countOfNotes() {
-        return notes.size();
+    public ArrayBlockingQueue<Note> find(String title) {
+
+        ArrayBlockingQueue<Note> notes = new ArrayBlockingQueue<>(1000);
+
+        for (Note s : MockSourseProvider.getNotes()) {
+            if (title.equals(s.getTitle())) {
+                notes.add(s);
+            }
+        }
+
+        return notes;
+
     }
+
+    public ArrayBlockingQueue<Note> get() {
+        return MockSourseProvider.getNotes();
+    }
+
+    public int countOfNotes() {
+        return MockSourseProvider.getNotes().size();
+    }
+
 }

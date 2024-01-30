@@ -20,7 +20,7 @@ public class UpdateNoteCommand implements Command {
         String response = null;
         String[] params;
         Note newNote;
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
         try {
             params = request.split("\n");
@@ -29,9 +29,9 @@ public class UpdateNoteCommand implements Command {
             newNote.setId(Integer.parseInt(params[1].split("=")[1]));
             newNote.setTitle(params[2].split("=")[1]);
             newNote.setContent(params[3].split("=")[1]);
-            newNote.setDate(format.parse(params[4].split("=")[1]));
+            newNote.setDate(formatter.parse(params[4].split("=")[1]));
 
-            logic.add(newNote);
+            logic.update(newNote);
 
             response = "Запись обновлена успешно.";
 

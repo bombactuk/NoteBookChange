@@ -7,25 +7,28 @@ import entity.Note;
 import java.io.IOException;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.ArrayBlockingQueue;
 
 public class FileNoteBookDao implements NoteBookDao {
 
+    private final MockSource mockSource = new MockSource();
+    private final FileSave fileSave = new FileSave();
+
     @Override
-    public void save(Note n) throws DaoException {
-
-        if (n.getId() == 0) {
-            n.setId(MockSource.countOfNotes() + 1);
-        }
-
-        if (n.getDate() == null) {
-            n.setDate(new Date());
-        }
+    public synchronized void save(Note n) throws DaoException {
 
         try {
+            if (n.getId() == 0) {
+                n.setId(mockSource.countOfNotes() + 1);
+            }
 
-            MockSource.add(n);
+            if (n.getDate() == null) {
+                n.setDate(new Date());
+            }
 
-            FileSave.dataStorage(MockSource.get());
+            mockSource.add(n);
+
+            fileSave.dataStorage(mockSource.get());
 
         } catch (IOException e) {
             throw new DaoException(e);
@@ -34,12 +37,13 @@ public class FileNoteBookDao implements NoteBookDao {
     }
 
     @Override
-    public void deleteNumberList(int numberInTheListDelete) throws DaoException {
+    public synchronized void update(Note n) throws DaoException {
 
         try {
-            MockSource.deleteNumberList(numberInTheListDelete);
 
-            FileSave.dataStorage(MockSource.get());
+            mockSource.update(n);
+
+            fileSave.dataStorage(mockSource.get());
 
         } catch (IOException e) {
             throw new DaoException(e);
@@ -48,24 +52,12 @@ public class FileNoteBookDao implements NoteBookDao {
     }
 
     @Override
-    public void deleteIdList(int idListDelete) throws DaoException {
-        try {
-            MockSource.deleteIdList(idListDelete);
-
-            FileSave.dataStorage(MockSource.get());
-
-        } catch (IOException e) {
-            throw new DaoException(e);
-        }
-    }
-
-    @Override
-    public void clear() throws DaoException {
+    public synchronized void deleteNumberList(int numberInTheListDelete) throws DaoException {
 
         try {
-            MockSource.clear();
+            mockSource.deleteNumberList(numberInTheListDelete);
 
-            FileSave.dataStorage(MockSource.get());
+            fileSave.dataStorage(mockSource.get());
 
         } catch (IOException e) {
             throw new DaoException(e);
@@ -74,12 +66,24 @@ public class FileNoteBookDao implements NoteBookDao {
     }
 
     @Override
-    public void sortNotesTitle() throws DaoException {
+    public synchronized void deleteIdList(int idListDelete) throws DaoException {
+        try {
+            mockSource.deleteIdList(idListDelete);
+
+            fileSave.dataStorage(mockSource.get());
+
+        } catch (IOException e) {
+            throw new DaoException(e);
+        }
+    }
+
+    @Override
+    public synchronized void clear() throws DaoException {
 
         try {
-            MockSource.sortNotesTitle();
+            mockSource.clear();
 
-            FileSave.dataStorage(MockSource.get());
+            fileSave.dataStorage(mockSource.get());
 
         } catch (IOException e) {
             throw new DaoException(e);
@@ -88,12 +92,12 @@ public class FileNoteBookDao implements NoteBookDao {
     }
 
     @Override
-    public void sortNotesContent() throws DaoException {
+    public void find(int idFind) throws DaoException {
 
         try {
-            MockSource.sortNotesContent();
+            mockSource.find(idFind);
 
-            FileSave.dataStorage(MockSource.get());
+            fileSave.findStorage(mockSource.find(idFind));
 
         } catch (IOException e) {
             throw new DaoException(e);
@@ -102,8 +106,22 @@ public class FileNoteBookDao implements NoteBookDao {
     }
 
     @Override
-    public List<Note> allNotes() throws DaoException {
-        return MockSource.get();
+    public void find(String title) throws DaoException {
+
+        try {
+
+            fileSave.findStorage(mockSource.find(title));
+
+        } catch (IOException e) {
+            throw new DaoException(e);
+        }
+
+    }
+
+
+    @Override
+    public synchronized ArrayBlockingQueue<Note> allNotes() throws DaoException {
+        return mockSource.get();
     }
 
 }

@@ -12,11 +12,11 @@ public class CommandProvider {
     CommandProvider() {
 
         repository.put(CommandName.ADD, new AddNoteCommand());
-        repository.put(CommandName.UPDATE, new UpdateNoteCommand());
         repository.put(CommandName.WRONG_REQUEST, new NoSuchCommand());
         repository.put(CommandName.DELETE, new DeleteNoteCommand());
-        repository.put(CommandName.SORT, new SortNotesCommand());
         repository.put(CommandName.CLEAR, new ClearNoteCommand());
+        repository.put(CommandName.UPDATE, new UpdateNoteCommand());
+        repository.put(CommandName.FIND, new FindNoteCommand());
 
     }
 

@@ -28,10 +28,10 @@ public class AddNoteCommand implements Command {
 
             logic.add(newNote);
 
-            response = "Запись сохранена успешно.";
+            response = "Recording continues successfully.";
 
         } catch (LogicException e) {
-            response = "Запись не сохранена.";
+            response = "Entry not saved.";
         }
 
         return response;

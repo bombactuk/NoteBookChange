@@ -5,7 +5,7 @@ import util.GenerateId;
 import java.util.Date;
 import java.util.Objects;
 
-public class Note implements Comparable<Note> {
+public class Note {
 
     private int id;
     private String title;
@@ -89,11 +89,6 @@ public class Note implements Comparable<Note> {
                 ", content='" + content + '\'' +
                 ", date=" + date +
                 '}';
-    }
-
-    @Override
-    public int compareTo(Note o) {
-        return this.title.compareTo(o.title);
     }
 
 }

@@ -18,7 +18,7 @@ public class Controller {
 
             response = executionCommand.execute(request);
         } catch (Exception e) {
-            response = "Технические проблемы";
+            response = "Technical problems.";
         }
 
         return response;

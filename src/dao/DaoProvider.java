@@ -23,6 +23,7 @@ public final class DaoProvider {
     }
 
     private static final String FILE_NAME = "textFileNote.txt";
+    private static final String FILE_NAME_FIND = "fileLocation.txt";
 
     private DaoProvider() throws IOException, ParseException {
 
@@ -30,6 +31,7 @@ public final class DaoProvider {
 
         String[] params;
         Note newNote;
+        MockSource mockSource = new MockSource();
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 
         String line = reader.readLine();
@@ -45,7 +47,7 @@ public final class DaoProvider {
             newNote.setContent(params[3].split("=")[1]);
             newNote.setDate(format.parse(params[4].split("=")[1]));
 
-            MockSource.add(newNote);
+            mockSource.add(newNote);
 
             line = reader.readLine();
 
@@ -67,6 +69,10 @@ public final class DaoProvider {
 
     public static String getFileName() {
         return FILE_NAME;
+    }
+
+    public static String getFileNameFind() {
+        return FILE_NAME_FIND;
     }
 
 }

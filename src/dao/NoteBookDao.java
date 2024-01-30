@@ -3,10 +3,13 @@ package dao;
 import entity.Note;
 
 import java.util.List;
+import java.util.concurrent.ArrayBlockingQueue;
 
 public interface NoteBookDao {
 
     void save(Note n) throws DaoException;
+
+    void update(Note n) throws DaoException;
 
     void deleteNumberList(int numberInTheListDelete) throws DaoException;
 
@@ -14,10 +17,10 @@ public interface NoteBookDao {
 
     void clear() throws DaoException;
 
-    void sortNotesTitle() throws DaoException;
+    void find(int idFind) throws DaoException;
 
-    void sortNotesContent() throws DaoException;
+    void find(String title) throws DaoException;
 
-    List<Note> allNotes() throws DaoException;
+    ArrayBlockingQueue<Note> allNotes() throws DaoException;
 
 }
