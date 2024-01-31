@@ -22,8 +22,7 @@ public class DeleteNoteCommand implements Command {
 
         switch (params[0]) {
 
-            case "number": {
-
+            case "number" -> {
                 try {
 
                     logic.deleteNumberList(Integer.parseInt(params[1]) - 1);
@@ -33,12 +32,9 @@ public class DeleteNoteCommand implements Command {
                 } catch (LogicException | NumberFormatException e) {
                     response = "The entry has not been deleted.";
                 }
-
-                break;
-
             }
 
-            case "id": {
+            case "id" -> {
                 try {
 
                     logic.deleteIdList(Integer.parseInt(params[1]));
@@ -48,13 +44,9 @@ public class DeleteNoteCommand implements Command {
                 } catch (LogicException | NumberFormatException e) {
                     response = "The entry has not been deleted.";
                 }
-
-                break;
             }
 
-            default: {
-                response = "Field deletion not found.";
-            }
+            default -> response = "Field deletion not found.";
 
         }
 

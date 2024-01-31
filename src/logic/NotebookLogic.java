@@ -2,6 +2,8 @@ package logic;
 
 import entity.Note;
 
+import java.util.ArrayList;
+
 public interface NotebookLogic {
 
     void add(Note n) throws LogicException;
@@ -14,8 +16,8 @@ public interface NotebookLogic {
 
     void clear() throws LogicException;
 
-    void find(int idFind) throws LogicException;
+    void find(int idFind);
 
-    void find(String title) throws LogicException;
+    void find(String title);
 
 }

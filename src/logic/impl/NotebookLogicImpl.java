@@ -7,6 +7,8 @@ import entity.Note;
 import logic.LogicException;
 import logic.NotebookLogic;
 
+import java.util.ArrayList;
+
 public class NotebookLogicImpl implements NotebookLogic {
 
     private final DaoProvider provider = DaoProvider.getInstance();
@@ -58,21 +60,13 @@ public class NotebookLogicImpl implements NotebookLogic {
     }
 
     @Override
-    public void find(int idFind) throws LogicException {
-        try {
-            dao.find(idFind);
-        } catch (DaoException e) {
-            throw new LogicException(e);
-        }
+    public void find(int idFind) {
+        dao.find(idFind);
     }
 
     @Override
-    public void find(String title) throws LogicException {
-        try {
-            dao.find(title);
-        } catch (DaoException e) {
-            throw new LogicException(e);
-        }
+    public void find(String title) {
+        dao.find(title);
     }
 
 }

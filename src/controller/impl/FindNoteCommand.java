@@ -21,39 +21,31 @@ public class FindNoteCommand implements Command {
 
         switch (params[0]) {
 
-            case "title": {
-
+            case "title" -> {
                 try {
 
                     logic.find(params[1]);
 
                     response = "Found strings are printed.";
 
-                } catch (LogicException | NumberFormatException e) {
+                } catch (NumberFormatException e) {
                     response = "Found lines are not displayed.";
                 }
-
-                break;
-
             }
 
-            case "id": {
+            case "id" -> {
                 try {
 
                     logic.find(Integer.parseInt(params[1]));
 
                     response = "Found strings are printed.";
 
-                } catch (LogicException | NumberFormatException e) {
+                } catch (NumberFormatException e) {
                     response = "Found lines are not displayed.";
                 }
-
-                break;
             }
 
-            default: {
-                response = "Field not found.";
-            }
+            default -> response = "Field not found.";
 
         }
 

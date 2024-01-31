@@ -2,9 +2,11 @@ package dao.impl;
 
 import entity.Note;
 
+import java.util.ArrayList;
 import java.util.concurrent.ArrayBlockingQueue;
 
 public final class MockSource {
+
     public void add(Note n) {
         MockSourseProvider.getNotes().add(n);
     }
@@ -50,9 +52,9 @@ public final class MockSource {
         MockSourseProvider.getNotes().removeIf(s -> s.getId() == idListDelete);
     }
 
-    public ArrayBlockingQueue<Note> find(int idFind) {
+    public void find(int idFind) {
 
-        ArrayBlockingQueue<Note> notes = new ArrayBlockingQueue<>(1000);
+        ArrayList<Note> notes = new ArrayList<>();
 
         for (Note s : MockSourseProvider.getNotes()) {
             if (idFind == s.getId()) {
@@ -60,13 +62,13 @@ public final class MockSource {
             }
         }
 
-        return notes;
+        System.out.println(notes);
 
     }
 
-    public ArrayBlockingQueue<Note> find(String title) {
+    public void find(String title) {
 
-        ArrayBlockingQueue<Note> notes = new ArrayBlockingQueue<>(1000);
+        ArrayList<Note> notes = new ArrayList<>();
 
         for (Note s : MockSourseProvider.getNotes()) {
             if (title.equals(s.getTitle())) {
@@ -74,7 +76,7 @@ public final class MockSource {
             }
         }
 
-        return notes;
+        System.out.println(notes);
 
     }
 

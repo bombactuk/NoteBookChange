@@ -5,6 +5,7 @@ import dao.NoteBookDao;
 import entity.Note;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.ArrayBlockingQueue;
@@ -92,35 +93,18 @@ public class FileNoteBookDao implements NoteBookDao {
     }
 
     @Override
-    public void find(int idFind) throws DaoException {
-
-        try {
-            mockSource.find(idFind);
-
-            fileSave.findStorage(mockSource.find(idFind));
-
-        } catch (IOException e) {
-            throw new DaoException(e);
-        }
-
+    public void find(int idFind) {
+        mockSource.find(idFind);
     }
 
     @Override
-    public void find(String title) throws DaoException {
-
-        try {
-
-            fileSave.findStorage(mockSource.find(title));
-
-        } catch (IOException e) {
-            throw new DaoException(e);
-        }
-
+    public void find(String title) {
+        mockSource.find(title);
     }
 
 
     @Override
-    public synchronized ArrayBlockingQueue<Note> allNotes() throws DaoException {
+    public synchronized ArrayBlockingQueue<Note> allNotes() {
         return mockSource.get();
     }
 

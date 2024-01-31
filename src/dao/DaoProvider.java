@@ -23,7 +23,6 @@ public final class DaoProvider {
     }
 
     private static final String FILE_NAME = "textFileNote.txt";
-    private static final String FILE_NAME_FIND = "fileLocation.txt";
 
     private DaoProvider() throws IOException, ParseException {
 
@@ -69,10 +68,6 @@ public final class DaoProvider {
 
     public static String getFileName() {
         return FILE_NAME;
-    }
-
-    public static String getFileNameFind() {
-        return FILE_NAME_FIND;
     }
 
 }

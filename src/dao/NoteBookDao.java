@@ -2,6 +2,7 @@ package dao;
 
 import entity.Note;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ArrayBlockingQueue;
 
@@ -17,10 +18,10 @@ public interface NoteBookDao {
 
     void clear() throws DaoException;
 
-    void find(int idFind) throws DaoException;
+    void find(int idFind);
 
-    void find(String title) throws DaoException;
+    void find(String title);
 
-    ArrayBlockingQueue<Note> allNotes() throws DaoException;
+    ArrayBlockingQueue<Note> allNotes();
 
 }
