@@ -15,9 +15,9 @@ public class UpdateNoteCommand implements Command {
     private final NotebookLogic logic = logicProvider.getNotebookLogic();
 
     @Override
-    public String execute(String request) {
+    public StringBuilder execute(String request) {
 
-        String response = null;
+        StringBuilder response = new StringBuilder();
         String[] params;
         Note newNote;
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
@@ -33,10 +33,10 @@ public class UpdateNoteCommand implements Command {
 
             logic.update(newNote);
 
-            response = "Запись обновлена успешно.";
+            response.append("Запись обновлена успешно.");
 
         } catch (LogicException | ParseException e) {
-            response = "Запись необновлена.";
+            response.append("Запись необновлена.");
         }
 
         return response;

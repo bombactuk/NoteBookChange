@@ -12,9 +12,9 @@ public class AddNoteCommand implements Command {
     private final NotebookLogic logic = logicProvider.getNotebookLogic();
 
     @Override
-    public String execute(String request) {
+    public StringBuilder execute(String request) {
 
-        String response = null;
+        StringBuilder response = new StringBuilder();
         String[] params;
         Note newNote;
 
@@ -28,10 +28,10 @@ public class AddNoteCommand implements Command {
 
             logic.add(newNote);
 
-            response = "Recording continues successfully.";
+            response.append("Recording continues successfully.");
 
         } catch (LogicException e) {
-            response = "Entry not saved.";
+            response.append("Entry not saved.");
         }
 
         return response;

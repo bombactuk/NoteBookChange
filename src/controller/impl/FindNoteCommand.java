@@ -11,9 +11,9 @@ public class FindNoteCommand implements Command {
     private final NotebookLogic logic = logicProvider.getNotebookLogic();
 
     @Override
-    public String execute(String request) {
+    public StringBuilder execute(String request) {
 
-        String response = null;
+        StringBuilder response = new StringBuilder();
         String[] params;
 
         params = request.split("\n");
@@ -26,10 +26,10 @@ public class FindNoteCommand implements Command {
 
                     logic.find(params[1]);
 
-                    response = "Found strings are printed.";
+                    response.append("Found strings are printed.");
 
                 } catch (NumberFormatException e) {
-                    response = "Found lines are not displayed.";
+                    response.append("Found lines are not displayed.");
                 }
             }
 
@@ -38,14 +38,14 @@ public class FindNoteCommand implements Command {
 
                     logic.find(Integer.parseInt(params[1]));
 
-                    response = "Found strings are printed.";
+                    response.append("Found strings are printed.");
 
                 } catch (NumberFormatException e) {
-                    response = "Found lines are not displayed.";
+                    response.append("Found lines are not displayed.");
                 }
             }
 
-            default -> response = "Field not found.";
+            default -> response.append("Field not found.");
 
         }
 

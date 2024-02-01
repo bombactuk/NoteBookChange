@@ -12,9 +12,9 @@ public class DeleteNoteCommand implements Command {
 
 
     @Override
-    public String execute(String request) {
+    public StringBuilder execute(String request) {
 
-        String response = null;
+        StringBuilder response = new StringBuilder();
         String[] params;
 
         params = request.split("\n");
@@ -27,10 +27,10 @@ public class DeleteNoteCommand implements Command {
 
                     logic.deleteNumberList(Integer.parseInt(params[1]) - 1);
 
-                    response = "The entry was deleted successfully.";
+                    response.append("The entry was deleted successfully.");
 
                 } catch (LogicException | NumberFormatException e) {
-                    response = "The entry has not been deleted.";
+                    response.append("The entry has not been deleted.");
                 }
             }
 
@@ -39,14 +39,14 @@ public class DeleteNoteCommand implements Command {
 
                     logic.deleteIdList(Integer.parseInt(params[1]));
 
-                    response = "The entry was deleted successfully.";
+                    response.append("The entry was deleted successfully.");
 
                 } catch (LogicException | NumberFormatException e) {
-                    response = "The entry has not been deleted.";
+                    response.append("The entry has not been deleted.");
                 }
             }
 
-            default -> response = "Field deletion not found.";
+            default -> response.append("Field deletion not found.");
 
         }
 

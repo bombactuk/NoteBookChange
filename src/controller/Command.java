@@ -1,5 +1,5 @@
 package controller;
 
 public interface Command {
-    String execute(String request);
+    StringBuilder execute(String request);
 }

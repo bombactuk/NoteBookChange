@@ -5,8 +5,12 @@ import controller.Command;
 public class NoSuchCommand implements Command {
 
     @Override
-    public String execute(String request) {
-        return "The request failed.";
+    public StringBuilder execute(String request) {
+
+        StringBuilder response = new StringBuilder();
+
+        return response.append("The request failed.");
+
     }
 
 }

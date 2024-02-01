@@ -11,17 +11,17 @@ public class ClearNoteCommand implements Command {
     private final NotebookLogic logic = logicProvider.getNotebookLogic();
 
     @Override
-    public String execute(String request) {
+    public StringBuilder execute(String request) {
 
-        String response = null;
+        StringBuilder response = new StringBuilder();
 
         try {
             logic.clear();
 
-            response = "List cleared.";
+            response.append("List cleared.");
 
         } catch (LogicException e) {
-            response = "The list has not been cleared.";
+            response.append("The list has not been cleared.");
         }
 
         return response;

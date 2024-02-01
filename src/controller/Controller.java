@@ -7,21 +7,21 @@ public class Controller {
 
     public String doAction(String request) {
 
-
         String commandName;
         Command executionCommand;
-        String response;
+        StringBuilder response = new StringBuilder();
 
         try {
             commandName = request.substring(0, request.indexOf(paramDelimeter));
             executionCommand = provider.getCommand(commandName.toUpperCase());
 
-            response = executionCommand.execute(request);
+            response.append(executionCommand.execute(request));
+
         } catch (Exception e) {
-            response = "Technical problems.";
+            response.append("Technical problems.");
         }
 
-        return response;
+        return response.toString();
 
     }
 
