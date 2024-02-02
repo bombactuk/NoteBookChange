@@ -9,7 +9,7 @@ public class Main {
         Controller controller = new Controller();
 
         String request;
-        StringBuffer response = new StringBuffer();
+        StringBuilder response = new StringBuilder();
 
         request = "ADD\ntitle=Книга\nсоntent=Туманность Андромеды";
         response.append(controller.doAction(request));
