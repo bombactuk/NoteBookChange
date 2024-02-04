@@ -22,31 +22,19 @@ public class DeleteNoteCommand implements Command {
 
         switch (params[0]) {
 
-            case "number" -> {
+            case "id", "number" -> {
+
                 try {
 
-                    logic.deleteNumberList(Integer.parseInt(params[1]) - 1);
+                    logic.deleteList(params[0], Integer.parseInt(params[1]));
 
                     response.append("The entry was deleted successfully.");
 
                 } catch (LogicException | NumberFormatException e) {
                     response.append("The entry has not been deleted.");
                 }
+
             }
-
-            case "id" -> {
-                try {
-
-                    logic.deleteIdList(Integer.parseInt(params[1]));
-
-                    response.append("The entry was deleted successfully.");
-
-                } catch (LogicException | NumberFormatException e) {
-                    response.append("The entry has not been deleted.");
-                }
-            }
-
-            default -> response.append("Field deletion not found.");
 
         }
 

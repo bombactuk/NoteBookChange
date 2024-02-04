@@ -33,22 +33,14 @@ public class NotebookLogicImpl implements NotebookLogic {
     }
 
     @Override
-    public void deleteNumberList(int numberInTheListDelete) throws LogicException {
+    public void deleteList(String deleteByValue, int deleteNumberValue) throws LogicException {
         try {
-            dao.deleteNumberList(numberInTheListDelete);
+            dao.deleteList(deleteByValue, deleteNumberValue);
         } catch (DaoException e) {
             throw new LogicException(e);
         }
     }
 
-    @Override
-    public void deleteIdList(int idListDelete) throws LogicException {
-        try {
-            dao.deleteIdList(idListDelete);
-        } catch (DaoException e) {
-            throw new LogicException(e);
-        }
-    }
 
     @Override
     public void clear() throws LogicException {
@@ -60,13 +52,22 @@ public class NotebookLogicImpl implements NotebookLogic {
     }
 
     @Override
-    public void find(int idFind) {
-        dao.find(idFind);
+    public void find(String field, String meaning) throws LogicException {
+        try {
+            dao.find(field, meaning);
+        } catch (DaoException e) {
+            throw new LogicException(e);
+        }
     }
 
     @Override
-    public void find(String title) {
-        dao.find(title);
+    public void sortList(String sortField) throws LogicException {
+        try {
+            dao.sortList(sortField);
+        } catch (DaoException e) {
+            throw new LogicException(e);
+        }
     }
+
 
 }

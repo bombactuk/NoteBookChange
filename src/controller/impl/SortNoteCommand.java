@@ -5,7 +5,7 @@ import logic.LogicException;
 import logic.LogicProvider;
 import logic.NotebookLogic;
 
-public class FindNoteCommand implements Command {
+public class SortNoteCommand implements Command {
 
     private final LogicProvider logicProvider = LogicProvider.getInstance();
     private final NotebookLogic logic = logicProvider.getNotebookLogic();
@@ -21,20 +21,21 @@ public class FindNoteCommand implements Command {
 
         switch (params[0]) {
 
-            case "id", "title" -> {
+            case "id", "title", "content", "date" -> {
 
                 try {
-                    logic.find(params[0], params[1]);
 
-                    response.append("Found strings are printed.");
+                    logic.sortList(params[0]);
 
-                } catch (LogicException e) {
-                    response.append("Сouldn't find.");
+                    response.append("Sorting was successful.");
+
+                } catch (LogicException | NumberFormatException e) {
+                    response.append("\n" + "Sorting was not successful.");
                 }
 
             }
 
-            default -> response.append("Field not found.");
+            default -> response.append("\n" + "Sort by field not found.");
 
         }
 

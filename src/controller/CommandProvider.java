@@ -17,6 +17,7 @@ public class CommandProvider {
         repository.put(CommandName.CLEAR, new ClearNoteCommand());
         repository.put(CommandName.UPDATE, new UpdateNoteCommand());
         repository.put(CommandName.FIND, new FindNoteCommand());
+        repository.put(CommandName.SORT, new SortNoteCommand());
 
     }
 

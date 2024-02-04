@@ -10,14 +10,12 @@ public interface NotebookLogic {
 
     void update(Note n) throws LogicException;
 
-    void deleteNumberList(int numberInTheListDelete) throws LogicException;
-
-    void deleteIdList(int idListDelete) throws LogicException;
+    void deleteList(String deleteByValue, int deleteNumberValue) throws LogicException;
 
     void clear() throws LogicException;
 
-    void find(int idFind);
+    void find(String field, String meaning) throws LogicException;
 
-    void find(String title);
+    void sortList(String sortField) throws LogicException;
 
 }

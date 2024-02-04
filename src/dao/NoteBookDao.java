@@ -12,15 +12,13 @@ public interface NoteBookDao {
 
     void update(Note n) throws DaoException;
 
-    void deleteNumberList(int numberInTheListDelete) throws DaoException;
-
-    void deleteIdList(int idListDelete) throws DaoException;
+    void deleteList(String deleteByValuem, int deleteNumberValue) throws DaoException;
 
     void clear() throws DaoException;
 
-    void find(int idFind);
+    void find(String field, String meaning) throws DaoException;
 
-    void find(String title);
+    void sortList(String sortField) throws DaoException;
 
     ArrayBlockingQueue<Note> allNotes();
 

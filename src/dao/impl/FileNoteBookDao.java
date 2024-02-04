@@ -53,23 +53,9 @@ public class FileNoteBookDao implements NoteBookDao {
     }
 
     @Override
-    public synchronized void deleteNumberList(int numberInTheListDelete) throws DaoException {
-
+    public void deleteList(String deleteByValue, int deleteNumberValue) throws DaoException {
         try {
-            mockSource.deleteNumberList(numberInTheListDelete);
-
-            fileSave.dataStorage(mockSource.get());
-
-        } catch (IOException e) {
-            throw new DaoException(e);
-        }
-
-    }
-
-    @Override
-    public synchronized void deleteIdList(int idListDelete) throws DaoException {
-        try {
-            mockSource.deleteIdList(idListDelete);
+            mockSource.deleteList(deleteByValue, deleteNumberValue);
 
             fileSave.dataStorage(mockSource.get());
 
@@ -77,6 +63,7 @@ public class FileNoteBookDao implements NoteBookDao {
             throw new DaoException(e);
         }
     }
+
 
     @Override
     public synchronized void clear() throws DaoException {
@@ -93,13 +80,27 @@ public class FileNoteBookDao implements NoteBookDao {
     }
 
     @Override
-    public void find(int idFind) {
-        mockSource.find(idFind);
+    public void find(String field, String meaning) throws DaoException {
+        try {
+            mockSource.find(field, meaning);
+
+        } catch (NumberFormatException e) {
+            throw new DaoException(e);
+        }
     }
 
     @Override
-    public void find(String title) {
-        mockSource.find(title);
+    public void sortList(String sortField) throws DaoException {
+
+        try {
+            mockSource.sortList(sortField);
+
+            fileSave.dataStorage(mockSource.get());
+
+        } catch (IOException e) {
+            throw new DaoException(e);
+        }
+
     }
 
 

@@ -33,10 +33,10 @@ public class UpdateNoteCommand implements Command {
 
             logic.update(newNote);
 
-            response.append("Запись обновлена успешно.");
+            response.append("The record was updated successfully.");
 
         } catch (LogicException | ParseException e) {
-            response.append("Запись необновлена.");
+            response.append("The entry has not been updated.");
         }
 
         return response;
